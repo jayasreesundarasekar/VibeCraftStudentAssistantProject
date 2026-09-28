@@ -664,5 +664,3 @@ A: Verify semester dates (Aug 29 - Nov 29, 2026) and refresh the page.
 [Back to Top](#attendguard--)
 
 </div>
-README.md
-Displaying README.md.
