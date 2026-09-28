@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AttendGuard + Free Class Locator</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root{--ink:#1d2340;--mu:#66708f;--bd:#e3e7f6;--ac:#5b5bd6;--ac2:#8b5cf6;--ok:#12a578;--wa:#f08c00;--dn:#f0603a;--det:#e03150;--irr:#a4103f}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:15px/1.55 "Nunito Sans",system-ui,sans-serif;background:radial-gradient(900px 400px at 90% -5%,#e9defc,transparent),radial-gradient(700px 400px at -5% 10%,#dbe6ff,transparent),#f5f6ff;min-height:100vh}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+h1,h2,h3,.brand,.kv,.pc{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+.hd{background:linear-gradient(110deg,#5b5bd6,#8b5cf6 60%,#ec6bb0);color:#fff;padding:14px 0 0;position:sticky;top:0;z-index:5;box-shadow:0 6px 24px #5b5bd633}
+.hb{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800;font-size:20px;padding-bottom:10px}.brand small{display:block;font:600 12px "Nunito Sans";opacity:.85}.logo{background:#ffffff33;border-radius:12px;padding:4px 9px}
+nav{display:flex;gap:4px;overflow-x:auto}nav button{background:transparent;color:#ffffffcc;border:0;padding:10px 16px;border-radius:12px 12px 0 0;font:700 14px "Nunito Sans";cursor:pointer;white-space:nowrap}
+nav button.on{background:#f5f6ff;color:var(--ac)}
+main{padding-top:18px;padding-bottom:50px}.tab{display:none}.tab.on{display:block}
+.card{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:18px;box-shadow:0 12px 34px #5b5bd614;margin-bottom:16px}
+.card h3{margin:0 0 12px;font-size:17px}
+.ctrl{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+label{font-size:12px;font-weight:700;color:var(--mu);display:block}
+input,select,textarea{display:block;width:100%;margin-top:4px;padding:9px 11px;border:1.5px solid var(--bd);border-radius:11px;background:#f8f9ff;color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid #8b5cf655;border-color:var(--ac2)}
+button.b{background:linear-gradient(120deg,var(--ac),var(--ac2));color:#fff;border:0;border-radius:11px;padding:10px 18px;font:700 14px "Nunito Sans";cursor:pointer;box-shadow:0 6px 16px #5b5bd640}
+button.g{background:#fff;color:var(--ac);border:1.5px solid var(--ac);border-radius:11px;padding:8px 14px;font:700 13px "Nunito Sans";cursor:pointer}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:16px}
+.kpi{border-radius:18px;padding:14px 16px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 10px 26px #5b5bd62b}
+.kpi small{opacity:.9;font-weight:700}.kv{font-size:30px;font-weight:800;line-height:1.15}
+.k1{--c1:#5b5bd6;--c2:#8b5cf6}.k2{--c1:#12a578;--c2:#4cc9a0}.k3{--c1:#f0603a;--c2:#f59f00}.k4{--c1:#0f9ac8;--c2:#5b8def}.k5{--c1:#d6489a;--c2:#ec6bb0}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.alert{border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px;font-weight:600}
+.alert.irr{background:linear-gradient(120deg,#a4103f,#e03150);color:#fff;animation:pl 1.6s infinite}.alert.am{background:#fff4dd;color:#8a5200;border:1.5px solid #ffd58a}.alert.gn{background:#e6f8f1;color:#0b6b4d;border:1.5px solid #a9e5cf}
+@keyframes pl{50%{box-shadow:0 0 0 8px #e0315030}}@media(prefers-reduced-motion:reduce){.alert.irr{animation:none}}
+.brow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 62px;gap:10px;align-items:center;margin:9px 0;font-size:13px}
+.bn{font-weight:700;line-height:1.2}.sc{display:inline-block;background:#eef0ff;color:var(--ac);border-radius:8px;padding:0 6px;font-size:11px;margin-left:4px}
+.track{position:relative;height:16px;background:#eceffb;border-radius:9px}.track i{position:absolute;left:0;top:0;bottom:0;border-radius:9px}
+.track u{position:absolute;top:-3px;bottom:-3px;width:2px;background:#1d2340;opacity:.55}.track u.t{background:var(--ok);opacity:1}
+.legend{font-size:12px;color:var(--mu);display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;color:var(--mu);font-size:12px;padding:6px}td{padding:7px 6px;border-top:1px solid var(--bd);vertical-align:middle}
+td input{margin:0;padding:6px 8px;width:84px}.pill{display:inline-block;color:#fff;border-radius:99px;padding:2px 10px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.scroll{overflow-x:auto}.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{background:#eef0ff;color:var(--ac);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;cursor:pointer}
+.drop{border:2px dashed #b9b9f0;border-radius:16px;padding:20px;text-align:center;background:#f8f7ff;color:var(--mu)}.drop.on{background:#efeaff}
+.note{font-size:12.5px;color:var(--mu)}.log{font-size:12px;color:var(--mu);white-space:pre-wrap;margin-top:8px}
+ul.an{margin:0;padding-left:18px}ul.an li{margin:6px 0}
+.chat{display:flex;flex-direction:column;height:420px;overflow-y:auto;gap:8px;padding:6px;background:#f8f9ff;border-radius:14px;border:1px solid var(--bd)}
+.m{max-width:85%;padding:9px 13px;border-radius:14px;white-space:pre-wrap}.m.me{align-self:flex-end;background:linear-gradient(120deg,var(--ac),var(--ac2));color:#fff}.m.bot{align-self:flex-start;background:#fff;border:1px solid var(--bd)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1;min-width:120px}.row .fix{flex:none}
+.mic.rec{background:var(--det);color:#fff;border-color:var(--det)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.ch{text-align:center;font-size:11px;font-weight:800;color:var(--mu)}
+.cd{position:relative;min-height:52px;border:1.5px solid var(--bd);border-radius:10px;padding:4px 6px;font-size:11px;background:#fff;cursor:pointer;color:var(--mu)}.cd b{font-size:13px;color:var(--ink)}.cd span{display:block;line-height:1.1}
+.cd.past{background:#eef2ff}.cd.hol{background:#fff4dd;border-color:#ffd58a}.cd.lv{background:#ede4ff;border-color:var(--ac2)}.cd.out{opacity:.3;cursor:default}.cd.td{outline:2.5px solid var(--ac)}
+.cd i{position:absolute;right:6px;top:6px;width:9px;height:9px;border-radius:50%}
+.wk{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}.wk u{display:block;height:12px;border-radius:7px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.letter{min-height:420px;font:14.5px/1.6 Georgia,"Times New Roman",serif;background:#fffdf8}
+.prio{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--bd)}.prio:first-of-type{border-top:0}
+.tgl{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink);font-weight:600}.tgl input{width:auto;margin:0}
+@media print{.hd,.ctrl,button,.drop,.chips{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}.kpi{color:#000;background:#fff!important;border:1px solid #999}}
+
+#rooms{--free:#1f8a4c;--fbg:#e3f5ea;--busy:#a0a8a4;--acc:#5b5bd6}
+#rooms .row{gap:10px}#rooms input,#rooms select{display:inline-block;width:auto;margin:0 0 0 4px}
+#rooms #fr_q{flex:1;width:100%;margin:0}#rooms input[type=checkbox]{margin:0 4px 0 0}
+#rooms .chip{cursor:pointer}#rooms #fr_ai{margin-top:10px;font-size:14px}
+#rooms .hit{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:var(--fbg);margin-top:6px;cursor:pointer}
+#rooms h2{font-size:15px;margin:14px 0 6px}#rooms .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+#rooms .room{border:1px solid var(--bd);border-radius:12px;padding:9px;background:#fff;cursor:pointer}#rooms .room b{display:block}
+#rooms .room span{font-size:12.5px;color:var(--mu)}#rooms .room.f{background:var(--fbg);border-color:var(--free)}#rooms .room.f span{color:var(--free)}#rooms .room.bz{opacity:.7}
+#rooms .tag{font-size:11px;border:1px solid var(--bd);border-radius:5px;padding:0 4px;margin-left:4px;color:var(--mu);font-style:normal}
+#rooms #fr_map{width:100%;max-width:430px;display:block;margin:0 auto}
+#rooms .fr{fill:var(--free)}#rooms .bz{fill:var(--busy)}#rooms .l{filter:brightness(.85)}#rooms .r{filter:brightness(.7)}#rooms .band{fill:var(--bd);opacity:.45}#rooms .fl{font-size:9px;fill:var(--mu);text-anchor:end}
+#rooms .rmg{cursor:pointer}#rooms .rmg polygon{stroke:#fff;stroke-width:1}#rooms .rmg.sel polygon{stroke:var(--ink);stroke-width:2}#rooms .rmg.hl polygon{stroke:var(--ac);stroke-width:2.5}#rooms .rmg.cl polygon{stroke:#a855f7;stroke-width:3}
+#rooms .rmg text{font-size:8.5px;font-weight:700;fill:#fff;stroke:#0009;stroke-width:2.5px;paint-order:stroke;text-anchor:middle;pointer-events:none}
+#rooms .big{font:700 32px/1.2 ui-monospace,Menlo,monospace;margin:2px 0 8px}#rooms .det{margin-top:10px;border-top:1px solid var(--bd);padding-top:10px}
+#rooms a.btn{display:inline-block;text-decoration:none;padding:8px 12px;border-radius:11px;background:#25d366;color:#053b1a;font-weight:700}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script></head>
+<body>
+<header class="hd"><div class="wrap hb"><div class="brand"><span class="logo">🎓</span><div>AttendGuard<small>Attendance · free-room finder · letters · AI</small></div></div>
+<nav id="tabs"><button data-t="dash" class="on">Dashboard</button><button data-t="cal">Calendar</button><button data-t="att">My attendance</button><button data-t="plan">Leave planner</button><button data-t="ltr">Letters</button><button data-t="rooms">Free rooms</button><button data-t="ai">AI assistant</button><button data-t="cfg">Settings</button></nav></div></header>
+<main class="wrap">
+<section class="card ctrl"><label>Class section<select id="sec"></select></label><label>Today<input type="date" id="today"></label>
+<label>Detention below (%)<input type="number" id="dt" min="1" max="100"></label><label>Required target (%)<input type="number" id="tg" min="1" max="100"></label><label>Safe from (%)<input type="number" id="wn" min="1" max="100"></label>
+<label>Holidays (YYYY-MM-DD, comma separated)<input id="hol"></label></section>
+<section id="dash" class="tab on"></section>
+<section id="cal" class="tab"></section>
+<section id="att" class="tab"></section>
+<section id="plan" class="tab"></section>
+<section id="ltr" class="tab"></section>
+<section id="rooms" class="tab">
+<h3>Free Class Locator</h3><p class="note">Find empty rooms on a 3D map, ask in plain English, and call your squad on WhatsApp.</p>
+
+<div class="card">
+<div class="row"><input id="fr_q" placeholder="e.g. I need an AC room on the ground floor for me and my team for the next 2 hours" autocomplete="off"><button class="b" id="fr_go">Find</button></div>
+<div class="chips"><span class="chip" data-q="AC room on the ground floor for the next 2 hours">AC · ground · 2h</span><span class="chip" data-q="quiet room on 4th floor for 1 hour on Wednesday at 11:00">Wed 11:00 · 1h</span><span class="chip" data-q="any free room for 90 minutes">any · 90 min</span></div>
+<div id="fr_ai"></div></div>
+
+<div class="card row">
+<label>Day <select id="fr_day"></select></label>
+<label>Time <input type="time" id="fr_time"></label>
+<button class="g" id="fr_now">Now</button>
+<label><input type="checkbox" id="fr_acOnly"> AC only</label>
+</div>
+<div class="card" id="fr_mapc"><b>3D building map</b> <span class="note">green free · grey in use · purple claimed · blue = AI match. Tap a room.</span><svg id="fr_map"></svg><div class="det" id="fr_det"></div></div>
+<div id="fr_grid"></div>
+<p class="note">Assumptions: floor = first digit of room number (1xx = ground). AC flags are placeholders (labs, 625, TB 106, 416, 518) — edit <code>AC</code> in the script. Lunch (12:30–1:20) counts as free. First-year sheets (2024-25, different periods and rooms) are excluded.</p>
+</section>
+<section id="ai" class="tab"></section>
+<section id="cfg" class="tab"></section>
+</main>
+
+<script>
+/* Sample timetable dataset transcribed from the 10 provided PDFs (13 sections).
+   Each day = 9 period tokens (P1..P9, lunch = P5). "-" = free. Tokens map to subjects in `subs`.
+   Replace or extend by editing this file, or load your own via CSV in the app. */
+const S=s=>Object.fromEntries(s.split(';').map(x=>x.split('=')));
+const G2="A=Transforms & Boundary Value Problems;B=Solid State Devices;C=Computer Organization & Architecture;D=Digital Logic Design;E=Electromagnetic Theory;F=Professional Ethics;G=Universal Human Values-II;H=Verbal Reasoning;I=Social Engineering;L=Devices & Digital IC Lab";
+const MP="B=Microprocessor & Microcontroller;G=Analytical & Logical Thinking;H=Indian Art Form;L=VLSI / Microprocessor Lab;F=Community Connect";
+const Y1="K=Chemistry Lab;W=Workshop;P=PPS Lab;R=Career Development (CDC);N=NSS;Q=PCB Lab";
+const TIMETABLES={
+"I ECE-A":{term:"Sample (2024-25 format)",subs:S("E=Philosophy of Engineering;A=Advanced Calculus;B=Chemistry;C=Electronic System & PCB;D=Programming for Problem Solving;F=Biology;G=German;"+Y1),days:{Mon:"E E B A - K K F R",Tue:"C B A D - W W W W",Wed:"B E D - - P P Q Q",Thu:"G G G A - R R N N",Fri:"D A C B - F G G G"}},
+"I ECE-B / EEE":{term:"Sample (2024-25 format)",subs:S("E=Philosophy of Engineering;A=Advanced Calculus;B=Chemistry;F=Electronic System & PCB;D=Programming for Problem Solving;C=Biology;G=German;"+Y1),days:{Mon:"R F K K - E E B A",Tue:"W W W W - C B A D",Wed:"F P R R P - B E D",Thu:"N N C A - D G G G",Fri:"Q Q - G G G - B A"}},
+"I ECE-DS":{term:"Sample (2024-25 format)",subs:S("E=Philosophy of Engineering;A=Advanced Calculus;B=Chemistry;C=Electronic System & PCB;D=Programming for Problem Solving;F=Biology;G=German;"+Y1),days:{Mon:"F R Q Q - E E B A",Tue:"K K N N - C B A D",Wed:"R R A - P P B E D",Thu:"F A D G G G - C B",Fri:"G G G P - W W W W"}},
+"I Biotech-B / BME":{term:"Sample (2024-25 format)",subs:S("E=Philosophy of Engineering;A=Advanced Calculus;B=Chemistry;D=Programming for Problem Solving;C=Cell Biology;F=Biochemistry;J=Japanese;Y=Yoga;"+Y1),days:{Mon:"C Y Y F - E E A B",Tue:"R R C F - - B A D",Wed:"W W W W - D B E D",Thu:"K K A C - B J J J",Fri:"F R A J J J - P P"}},
+"II ECE-DS A":{term:"Odd 2026-27 · Sem III",subs:S(G2),days:{Mon:"E A I I - G G L L",Tue:"C A E D - G - H H",Wed:"A B C D - - H - -",Thu:"B C A F - L L - -",Fri:"D B E C - - - - -"}},
+"II ECE-DS B":{term:"Odd 2026-27 · Sem III",subs:S(G2),days:{Mon:"- - L L - D B C I",Tue:"L L - - - C D E A",Wed:"G - - - - I E A D",Thu:"G G H H - A C B E",Fri:"H - - - - F A B C"}},
+"II BME":{term:"Odd 2026-27 · Sem III",subs:S("A=Transforms & Boundary Value Problems;B=Biomedical Signals & Systems;C=Electric & Electronic Circuits;D=Digital Logic for Medical Systems;E=Medical Physics;F=Professional Ethics;G=Universal Human Values-II;H=Verbal Reasoning;I=Social Engineering;L=DLMS / EEC Lab"),days:{Mon:"E C I I - L L - -",Tue:"C E B A - H H - -",Wed:"B D A - - H G - -",Thu:"A E B D - - - L L",Fri:"F A C D - - - G G"}},
+"III ECE-A":{term:"Odd 2026-27 · Sem V",subs:S("A=Discrete Mathematics;C=VLSI Design & Technology;D=System & Network on Chip;E=Machine Learning for All;"+MP),days:{Mon:"E B B A - G G - -",Tue:"H D B B - - G - -",Wed:"C A D F - - - L L",Thu:"A E C F - - - - -",Fri:"D A E C - L L - -"}},
+"III ECE-B":{term:"Odd 2026-27 · Sem V",subs:S("A=Discrete Mathematics;C=VLSI Design & Technology;D=System & Network on Chip;E=Machine Learning for All;"+MP),days:{Mon:"L L - - - E B A D",Tue:"G G - - - F B D C",Wed:"G - - - - B B A H",Thu:"L L - - - A C E F",Fri:"- - - - - C A E D"}},
+"III ECE-DS":{term:"Odd 2026-27 · Sem V",subs:S("A=Discrete Mathematics;C=VLSI Design & Technology;D=Machine Learning for All;E=Database Design & Management;"+MP),days:{Mon:"E B C A - - - - -",Tue:"C B D F - L L - -",Wed:"H B A C - - - G G",Thu:"A D E F - - - - -",Fri:"D A E B - G - L L"}},
+"III BME":{term:"Odd 2026-27 · Sem V",subs:S("A=Probability & Statistics;B=Microcontrollers in Medicine;C=Biomedical Signal Processing;D=Biometrics;E=Modern Wireless Communication;F=Principles of Medical Imaging;G=Analytical & Logical Thinking;H=Indian Art Form;I=Community Connect;M=Microcontroller Lab (MPMC);P=Bio DSP Lab"),days:{Mon:"G G M M - E B F H",Tue:"P P G - - C D A B",Wed:"- - - - - C A F D",Thu:"- - - I - A C E B",Fri:"I - - - - F A D E"}},
+"IV ECE-A":{term:"Odd 2026-27 · Sem VII",subs:S("A=Behavioural Psychology;B=Wireless Comm & Antenna Systems;C=Computer Comm & Network Security;D=Semiconductor Memory Design;E=Scripting Language for EDA;F=Machine Learning for All;L=CCNS Lab"),days:{Mon:"C - A D - - - - -",Tue:"C D B F - - - - -",Wed:"B L E F - - - - -",Thu:"F A E B - - - - -",Fri:"C A D E - - - - -"}},
+"IV ECE-B":{term:"Odd 2026-27 · Sem VII",subs:S("A=Behavioural Psychology;B=Wireless Comm & Antenna Systems;C=Computer Comm & Network Security;D=Semiconductor Memory Design;E=Scripting Language for EDA;F=Machine Learning for All;L=CCNS Lab"),days:{Mon:"C A E F - - - - -",Tue:"C E F B - - - - -",Wed:"C D A B - - - - -",Thu:"D B L A - - - - -",Fri:"E D F - - - - - -"}}
+};
+
+</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const START='2026-08-29',END='2026-11-29',DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const pd=s=>new Date(s+'T12:00:00'),iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const add=(s,n)=>{const d=pd(s);d.setDate(d.getDate()+n);return iso(d)};
+const f1=x=>(+x).toFixed(1),sgn=x=>Math.max(0,x);
+const St={sec:'III ECE-A',today:iso(new Date()),att:{},leaves:new Set(),hol:new Set(['2026-10-02']),dt:75,tg:90,wn:92,prof:{},store:{},odp:true,custom:{}};
+const ST={safe:['Safe','#12a578'],warn:['Watch','#f08c00'],danger:['Below target','#f0603a'],det:['Detention zone','#e03150'],irr:['Irreversible','#a4103f']};
+const SAMPLE=[88,93,79,96,84,91,76,90,86,82,94];
+const tt=()=>TIMETABLES[St.sec];
+const toks=()=>Object.keys(tt().subs).filter(k=>Object.values(tt().days).some(r=>r.split(' ').includes(k)));
+function dayCounts(ds){const c={};if(St.hol.has(ds))return c;const r=tt().days[DN[pd(ds).getDay()]];if(r)r.split(' ').forEach(t=>{if(t!=='-')c[t]=(c[t]||0)+1});return c}
+function dates(a,b){const o=[];for(let d=a;d<=b;d=add(d,1)){const c=dayCounts(d);if(Object.keys(c).length)o.push({d,c})}return o}
+const cnt=(L,k)=>L.reduce((a,x)=>a+(x.c[k]||0),0),tot=x=>Object.values(x.c).reduce((a,b)=>a+b,0);
+function initAtt(sample){const past=dates(START,add(St.today,-1));St.att={};toks().forEach((k,i)=>{const c=cnt(past,k);St.att[k]={c,a:Math.round(c*(sample?SAMPLE[i%SAMPLE.length]:100)/100),od:0}})}
+function analyze(){
+  const from=St.today<START?START:St.today,fut=dates(from,END),tg=St.tg,dt=St.dt,wn=St.wn;
+  const rows=toks().map(k=>{const T=St.att[k].c,A=St.att[k].a+(St.odp?(St.att[k].od||0):0),R=cnt(fut,k),F=T+R,cur=T?A/T*100:100;
+    const nDT=sgn(Math.ceil(dt/100*F-A-1e-9)),nTG=sgn(Math.ceil(tg/100*F-A-1e-9));
+    const skipDT=nDT>R?-1:R-nDT,skipTG=nTG>R?-1:R-nTG;
+    const rec=cur<tg&&tg<100?Math.ceil((tg/100*T-A)/(1-tg/100)-1e-9):0;
+    let reach=null;if(rec>0){let a=A,t=T;for(const x of fut){const n=x.c[k]||0;if(!n)continue;a+=n;t+=n;if(a/t*100>=tg){reach=x.d;break}}}
+    const st=nDT>R?'irr':cur<dt?'det':cur<tg?'danger':cur<wn?'warn':'safe';
+    const score=Math.round(Math.max(0,Math.min(1,(cur-dt)/(100-dt)))*100);
+    return{k,name:tt().subs[k],T,A,R,cur,nDT,nTG,skipDT,skipTG,rec,reach,st,score}});
+  const TA=rows.reduce((a,r)=>a+r.A,0),TT=rows.reduce((a,r)=>a+r.T,0),ov=TT?TA/TT*100:100;
+  const has=s=>rows.some(r=>r.st===s),risk=has('irr')?'Irreversible':has('det')?'High':has('danger')?'Medium':has('warn')?'Low':'Minimal';
+  return{rows,fut,ov,TA,TT,risk,left:rows.reduce((a,r)=>a+r.R,0),skips:rows.reduce((a,r)=>a+sgn(r.skipTG),0)}}
+function daysOff(rows,fut,key){const b={};rows.forEach(r=>b[r.k]=r[key]);const pick=[];
+  [...fut].sort((x,y)=>tot(x)-tot(y)||(x.d<y.d?-1:1)).forEach(x=>{if(Object.keys(x.c).every(k=>b[k]>=x.c[k])){Object.keys(x.c).forEach(k=>b[k]-=x.c[k]);pick.push(x.d)}});
+  return pick.sort()}
+/* ---------- charts ---------- */
+function bars(rows){return rows.map(r=>`<div class="brow"><div class="bn">${esc(r.name)}<span class="sc" title="Safety score">${r.score}</span></div><div class="track"><i style="width:${Math.min(100,r.cur)}%;background:${ST[r.st][1]}"></i><u style="left:${St.dt}%"></u><u class="t" style="left:${St.tg}%"></u></div><b>${f1(r.cur)}%</b></div>`).join('')+`<div class="legend"><span>▮ black line = detention ${St.dt}%</span><span style="color:var(--ok)">▮ green line = target ${St.tg}%</span><span>Score = safety (0 at detention line, 100 = perfect)</span></div>`}
+function donut(rows){const n=rows.length,keys=Object.keys(ST);let off=0;const C=2*Math.PI*48;
+  const arcs=keys.map(k=>{const c=rows.filter(r=>r.st===k).length;if(!c)return'';const l=c/n*C,s=`<circle cx="60" cy="60" r="48" fill="none" stroke="${ST[k][1]}" stroke-width="20" stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-off}"/>`;off+=l;return s}).join('');
+  return`<div class="row"><svg class="fix" width="140" height="140" viewBox="0 0 120 120" style="transform:rotate(-90deg)">${arcs}</svg><div class="fix" style="min-width:150px">${keys.map(k=>`<div><span class="pill" style="background:${ST[k][1]}">${rows.filter(r=>r.st===k).length}</span> ${ST[k][0]}</div>`).join('')}</div></div>`}
+function line(a){const W=640,H=250,p=36,L=[['Attend every class','#12a578',1],['Follow leave plan','#5b5bd6',2],['Skip every class from today','#e03150',3]];
+  const pts=L.map(()=>[[0,a.TT?a.TA/a.TT*100:100]]);let A=[a.TA,a.TA,a.TA],T=a.TT,i=0;
+  a.fut.forEach((x,ix)=>{const n=tot(x);T+=n;A[0]+=n;A[1]+=St.leaves.has(x.d)?0:n;pts.forEach((s,j)=>s.push([ix+1,A[j]/T*100]))});
+  const all=pts.flat().map(q=>q[1]),lo=Math.floor(Math.min(...all,St.dt)/5)*5-5,hi=100,N=Math.max(1,a.fut.length);
+  const X=v=>p+v/N*(W-2*p),Y=v=>H-p-(v-lo)/(hi-lo)*(H-2*p);
+  const ln=(v,c)=>`<line x1="${p}" x2="${W-p}" y1="${Y(v)}" y2="${Y(v)}" stroke="${c}" stroke-dasharray="5 4"/><text x="${W-p+3}" y="${Y(v)+4}" font-size="10" fill="${c}">${v}%</text>`;
+  const grid=[0,1,2,3,4].map(g=>{const v=lo+(hi-lo)*g/4;return`<text x="4" y="${Y(v)+4}" font-size="10" fill="#66708f">${Math.round(v)}</text>`}).join('');
+  return`<svg viewBox="0 0 ${W} ${H}" width="100%">${grid}${ln(St.dt,'#e03150')}${ln(St.tg,'#12a578')}${pts.map((s,j)=>`<polyline fill="none" stroke="${L[j][1]}" stroke-width="3" stroke-linejoin="round" points="${s.map(q=>X(q[0])+','+Y(q[1])).join(' ')}"/>`).join('')}<text x="${p}" y="${H-8}" font-size="10" fill="#66708f">${a.fut[0]?a.fut[0].d:''}</text><text x="${W-p-52}" y="${H-8}" font-size="10" fill="#66708f">${END}</text></svg><div class="legend">${L.map(l=>`<span style="color:${l[1]}">● ${l[0]}</span>`).join('')}</div>`}
+/* ---------- tabs ---------- */
+function renderDash(){const a=analyze(),{rows}=a,irr=rows.filter(r=>r.st==='irr'),bad=rows.filter(r=>r.st==='det'||r.st==='danger');
+  const d90=daysOff(rows,a.fut,'skipTG').length,d75=daysOff(rows,a.fut,'skipDT').length;let h=toolbar();
+  if(irr.length)h+=`<div class="alert irr"><span>🚨</span><div><b>IRREVERSIBLE DETENTION — ${irr.map(r=>esc(r.name)).join(', ')}</b><br>Even attending every remaining class, you cannot reach ${St.dt}% by 29 Nov 2026.</div></div>`;
+  if(bad.length)h+=`<div class="alert am"><span>⚠️</span><div>Below your ${St.tg}% target: ${bad.map(r=>esc(r.name)).join(', ')}. See the recovery analysis below.</div></div>`;
+  else if(!irr.length)h+=`<div class="alert gn"><span>✅</span><div>All subjects are at or above target. Use the leave planner to spend your safe buffer wisely.</div></div>`;
+  h+=`<div class="kpis"><div class="kpi k1"><small>Overall attendance</small><div class="kv">${f1(a.ov)}%</div><small>${a.TA}/${a.TT} classes</small></div>
+  <div class="kpi ${a.risk==='Minimal'||a.risk==='Low'?'k2':'k3'}"><small>Detention risk</small><div class="kv">${a.risk}</div><small>${bad.length+irr.length} of ${rows.length} subjects at risk</small></div>
+  <div class="kpi k2"><small>Safe skips left</small><div class="kv">${a.skips}</div><small>while finishing ≥ ${St.tg}%</small></div>
+  <div class="kpi k4"><small>Classes left</small><div class="kv">${a.left}</div><small>till 29 Nov 2026</small></div>
+  <div class="kpi k5"><small>Full days off possible</small><div class="kv">${d90}</div><small>${d75} if you only need ${St.dt}%</small></div></div>`;
+  h+=`<div class="two"><div class="card"><h3>Subject-wise attendance &amp; safety score</h3>${bars(rows)}</div><div class="card"><h3>Status mix</h3>${donut(rows)}<h3 style="margin-top:14px">Attendance forecast (overall)</h3>${line(a)}</div></div>`;
+  h+=`<div class="card"><h3>Detailed analysis</h3><div class="scroll"><table><tr><th>Subject</th><th>Now</th><th>Left</th><th>Must attend ≥${St.dt}%</th><th>Must attend ≥${St.tg}%</th><th>Can skip (${St.tg}%)</th><th>Can skip (${St.dt}%)</th><th>Status</th></tr>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td><b>${f1(r.cur)}%</b></td><td>${r.R}</td><td>${r.nDT>r.R?'Impossible':r.nDT}</td><td>${r.nTG>r.R?'Not reachable':r.nTG}</td><td>${sgn(r.skipTG)}</td><td>${sgn(r.skipDT)}</td><td><span class="pill" style="background:${ST[r.st][1]}">${ST[r.st][0]}</span></td></tr>`).join('')}</table></div></div>`;
+  const an=rows.filter(r=>r.rec>0);
+  h+=`<div class="card"><h3>Recovery analysis (subjects below ${St.tg}%)</h3>${an.length?`<ul class="an">${an.map(r=>`<li><b>${esc(r.name)}</b> — ${f1(r.cur)}%. Attend the next <b>${r.rec}</b> classes in a row to return to ${St.tg}%${r.reach?` (about <b>${r.reach}</b> if you attend all)`:' — not possible before semester end'}. Of the ${r.R} classes left, attend at least <b>${r.nTG>r.R?'all, but it is still not enough':r.nTG}</b> to finish above target.${r.st==='det'||r.st==='irr'?' <b>Skipping more will put you in detention.</b>':''}</li>`).join('')}</ul>`:'<p class="note">Nothing to recover. Every subject is at or above target.</p>'}</div>`;
+  h+=outlookHTML(a)+priorityHTML(a);$('dash').innerHTML=h;bindToolbar()}
+const pctOf=o=>o.c?(o.a+(St.odp?o.od||0:0))/o.c*100:100;
+function renderAtt(){const h=`<div class="two"><div class="card"><h3>Upload your attendance report</h3><div class="drop" id="drop"><p><b>Drop your attendance PDF (or CSV) here</b></p><input type="file" id="file" accept=".pdf,.csv,.txt"><p class="note">Each subject line should contain its name plus conducted and attended counts. Anything that can't be read is left for you to edit below. Your file is processed in your browser and never uploaded.</p></div><div class="log" id="log"></div>
+  <div class="row" style="margin-top:12px"><button class="g" id="samp">Load sample attendance</button><button class="g" id="est">Assume 100% attendance so far</button></div></div>
+  <div class="card"><h3>Percentage calculator</h3><div class="row"><label>Attended<input type="number" id="ca" value="38" min="0"></label><label>Conducted<input type="number" id="cc" value="43" min="1"></label></div><div id="cr" style="margin-top:12px"></div></div></div>
+  <div class="card"><h3>Your subjects (edit any value)</h3><div class="scroll"><table><tr><th>Subject</th><th>Conducted</th><th>Attended</th><th title="On-duty classes, counted as present when enabled in Settings">OD</th><th>%</th></tr>${toks().map(k=>`<tr><td>${esc(tt().subs[k])}</td><td><input type="number" min="0" data-k="${k}" data-f="c" value="${St.att[k].c}"></td><td><input type="number" min="0" data-k="${k}" data-f="a" value="${St.att[k].a}"></td><td><input type="number" min="0" data-k="${k}" data-f="od" value="${St.att[k].od||0}"></td><td id="p_${k}"><b>${f1(pctOf(St.att[k]))}%</b></td></tr>`).join('')}</table></div></div>`;
+  $('att').innerHTML=h;
+  $('att').querySelectorAll('td input').forEach(i=>i.oninput=()=>{const o=St.att[i.dataset.k];o[i.dataset.f]=Math.max(0,+i.value||0);$('p_'+i.dataset.k).innerHTML=`<b>${f1(pctOf(o))}%</b>`;refresh(['dash','plan','cal'])});
+  $('samp').onclick=()=>{initAtt(true);renderAll()};$('est').onclick=()=>{initAtt(false);renderAll()};
+  const calc=()=>{const A=+$('ca').value,C=+$('cc').value,t=St.tg/100;if(!C||A>C){$('cr').innerHTML='<p class="note">Enter attended ≤ conducted.</p>';return}
+    const p=A/C*100,can=Math.floor(A/t-C+1e-9),need=Math.ceil((t*C-A)/(1-t)-1e-9);
+    $('cr').innerHTML=`<div class="kv" style="font-size:34px">${f1(p)}%</div>`+(p>=St.tg?`<p>You can miss <b>${sgn(can)}</b> more class(es) and stay ≥ ${St.tg}%. Missing ${sgn(can)+1} would drop you below.</p>`:`<p>Attend the next <b>${need}</b> class(es) in a row to reach ${St.tg}%.</p>`)};
+  $('ca').oninput=$('cc').oninput=calc;calc();
+  const dr=$('drop');dr.ondragover=e=>{e.preventDefault();dr.classList.add('on')};dr.ondragleave=()=>dr.classList.remove('on');dr.ondrop=e=>{e.preventDefault();dr.classList.remove('on');handleFile(e.dataTransfer.files[0])};$('file').onchange=e=>handleFile(e.target.files[0])}
+function renderPlan(){const a=analyze(),{rows}=a,miss={};
+  St.leaves.forEach(d=>{if(d>=(St.today<START?START:St.today)){const c=dayCounts(d);for(const k in c)miss[k]=(miss[k]||0)+c[k]}});
+  const res=rows.map(r=>{const m=miss[r.k]||0,fin=(r.A+r.R-m)/(r.T+r.R)*100,now=r.T?r.A/r.T*100:100;return{...r,m,fin,st2:fin<St.dt?'det':fin<St.tg?'danger':fin<St.wn?'warn':'safe'}});
+  const hurt=res.filter(r=>r.m&&r.fin<St.tg),d90=daysOff(rows,a.fut,'skipTG'),d75=daysOff(rows,a.fut,'skipDT');
+  let h=`<div class="two"><div class="card"><h3>Plan your leave</h3><div class="row"><label>From<input type="date" id="lf" value="${St.today}"></label><label>To<input type="date" id="lt" value="${St.today}"></label></div><div class="row" style="margin-top:10px"><button class="b fix" id="ladd">Add leave days</button><button class="g fix" id="lclr">Clear</button></div>
+  <div class="chips">${[...St.leaves].sort().map(d=>`<span class="chip" data-d="${d}" title="Remove">${d} ✕</span>`).join('')||'<span class="note">No leave planned yet.</span>'}</div>
+  ${hurt.length?`<div class="alert am"><span>⚠️</span><div>This plan pushes ${hurt.map(r=>esc(r.name)).join(', ')} below ${St.tg}%${res.some(r=>r.st2==='det'&&r.m)?' — <b>and into the detention zone</b>':''}.</div></div>`:St.leaves.size?'<div class="alert gn"><span>✅</span><div>Your plan keeps every subject at or above target (assuming you attend all other classes).</div></div>':''}</div>
+  <div class="card"><h3>Days off you can afford</h3><div class="kv" style="font-size:38px">${d90.length}</div><p>full class days you can skip and still finish every subject ≥ ${St.tg}%.</p><p><b>${d75.length}</b> days if you only need to avoid detention (${St.dt}%).</p><p class="note">Lightest days first: ${d90.slice(0,8).join(', ')||'none'}</p>${d90.length?'<button class="g" id="lsug">Add these to my plan</button>':''}</div></div>
+  <div class="card"><h3>Impact on each subject</h3><div class="scroll"><table><tr><th>Subject</th><th>Now</th><th>Classes missed</th><th>Final if plan followed</th><th>Result</th></tr>${res.map(r=>`<tr><td>${esc(r.name)}</td><td>${f1(r.cur)}%</td><td>${r.m}</td><td><b>${f1(r.fin)}%</b></td><td><span class="pill" style="background:${ST[r.st2][1]}">${ST[r.st2][0]}</span></td></tr>`).join('')}</table></div></div>
+  <div class="card"><h3>What if I miss N classes of one subject?</h3><div class="row"><label>Subject<select id="ws">${rows.map(r=>`<option value="${r.k}">${esc(r.name)}</option>`).join('')}</select></label><label>Classes<input type="number" id="wn2" value="3" min="0"></label></div><div id="wr" style="margin-top:10px"></div></div>`;
+  $('plan').innerHTML=h;
+  $('ladd').onclick=()=>{let f=$('lf').value,t=$('lt').value||f;if(!f)return;for(let d=f;d<=t&&d<=END;d=add(d,1))St.leaves.add(d);renderPlan()};
+  $('lclr').onclick=()=>{St.leaves.clear();renderPlan()};$('plan').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{St.leaves.delete(c.dataset.d);renderPlan()});
+  if($('lsug'))$('lsug').onclick=()=>{d90.forEach(d=>St.leaves.add(d));renderPlan()};
+  const wi=()=>{const r=rows.find(x=>x.k===$('ws').value)||rows[0],n=+$('wn2').value||0,now=r.cur,fin=(r.A+r.R-Math.min(n,r.R))/(r.T+r.R)*100,aft=r.T?r.A/(r.T+n)*100:100;
+    $('wr').innerHTML=`<p>Missing <b>${n}</b> more ${esc(r.name)} class(es): attendance goes from <b>${f1(now)}%</b> to <b>${f1(aft)}%</b> right away, and you would finish the semester at <b>${f1(fin)}%</b> (if you attend the rest). ${fin<St.dt?'<b style="color:var(--det)">That is detention territory.</b>':fin<St.tg?'<b style="color:var(--dn)">Below your target.</b>':'<b style="color:var(--ok)">Still safe.</b>'}</p>`};
+  $('ws').onchange=$('wn2').oninput=wi;wi()}
+const R={dash:()=>renderDash(),att:()=>renderAtt(),plan:()=>renderPlan(),cal:()=>renderCal(),ltr:()=>renderLet(),cfg:()=>renderSet()};
+function refresh(l){l.forEach(t=>R[t]());save()}
+function renderAll(){refresh(['dash','cal','att','plan']);if(window.renderAI)renderAI()}
+/* ---------- attendance file import ---------- */
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9 ]/g,' ');
+async function handleFile(f){if(!f)return;const log=$('log');log.textContent='Reading '+f.name+' …';let text='';
+  try{if(/\.pdf$/i.test(f.name)){if(!window.pdfjsLib)throw new Error('PDF reader could not load (check internet). Try CSV or edit the table by hand.');
+      pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;
+      for(let p=1;p<=pdf.numPages;p++){const c=await(await pdf.getPage(p)).getTextContent(),rows={};c.items.forEach(i=>{const y=Math.round(i.transform[5]/3);(rows[y]=rows[y]||[]).push([i.transform[4],i.str])});
+        Object.keys(rows).sort((a,b)=>b-a).forEach(y=>{text+=rows[y].sort((a,b)=>a[0]-b[0]).map(x=>x[1]).join(' ')+'\n'})}}
+    else text=await f.text();
+    const r=parseAttendance(text);log.textContent=`Matched ${r.matched} subject(s) from ${f.name}.`+(r.miss.length?'\nCould not match: '+r.miss.join(' | '):'')+(r.matched?'':'\nNo subject rows found — enter values in the table below.');
+    renderAll()}catch(e){log.textContent='Could not read file: '+e.message}}
+function parseAttendance(text){let matched=0;const miss=[],seen=new Set();
+  text.split(/\r?\n/).forEach(line=>{const nm=norm(line),nums=(line.match(/\d+(?:\.\d+)?/g)||[]).map(Number);if(nums.length<2)return;
+    let best=null,bs=0;toks().forEach(k=>{const w=norm(tt().subs[k]).split(' ').filter(x=>x.length>3);if(!w.length)return;const s=w.filter(x=>nm.includes(x)).length/w.length;if(s>bs){bs=s;best=k}});
+    if(!best||bs<0.6){if(miss.length<4&&/[a-z]{4}/i.test(line))miss.push(line.trim().slice(0,50));return}
+    const ints=nums.filter(Number.isInteger);let c=null,a=null;
+    for(let i=0;i+2<ints.length&&c===null;i++)if(ints[i]===ints[i+1]+ints[i+2]&&ints[i]>0){c=ints[i];a=ints[i+1]}
+    for(let i=0;i+1<ints.length&&c===null;i++)if(ints[i]>=ints[i+1]&&ints[i]<=400){const p=nums.find(n=>n<=100&&!Number.isInteger(n));if(p===undefined||Math.abs(ints[i+1]/ints[i]*100-p)<1.5){c=ints[i];a=ints[i+1]}}
+    if(c!==null&&!seen.has(best)){St.att[best]={c,a,od:(St.att[best]||{}).od||0};seen.add(best);matched++}});
+  return{matched,miss}}
+/* ---------- boot ---------- */
+function fillSecs(){$('sec').innerHTML=Object.keys(TIMETABLES).map(x=>`<option>${esc(x)}</option>`).join('');$('sec').value=St.sec}
+function bind(){fillSecs();$('today').value=St.today;$('dt').value=St.dt;$('tg').value=St.tg;$('wn').value=St.wn;$('hol').value=[...St.hol].join(', ');
+  $('sec').onchange=()=>{St.store[St.sec]=St.att;St.sec=$('sec').value;St.leaves.clear();St.att=St.store[St.sec]||{};if(!toks().every(k=>St.att[k]))initAtt(true);renderAll();renderLet()};
+  $('today').onchange=()=>{St.today=$('today').value||iso(new Date());renderAll()};
+  ['dt','tg','wn'].forEach(id=>$(id).onchange=()=>{St[id]=Math.min(100,Math.max(1,+$(id).value||St[id]));renderAll()});
+  $('hol').onchange=()=>{St.hol=new Set($('hol').value.split(',').map(x=>x.trim()).filter(Boolean));renderAll()};
+  document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.id===b.dataset.t));window.scrollTo(0,0)})}
+
+</script>
+<script>
+'use strict';
+const KEY='attendguard.pro.v3',MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const VER={ok:['Safe to skip','#12a578'],risk:['Skip only above detention line','#f08c00'],no:["Don't skip",'#e03150']};
+const fd=ds=>{const d=pd(ds);return `${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`},short=n=>n.length>26?n.slice(0,24)+'…':n;
+/* persistence */
+function save(){try{St.store[St.sec]=St.att;localStorage.setItem(KEY,JSON.stringify({sec:St.sec,store:St.store,leaves:[...St.leaves],hol:[...St.hol],dt:St.dt,tg:St.tg,wn:St.wn,prof:St.prof,odp:St.odp,custom:St.custom}))}catch(e){}}
+function load(){try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(!j)return;Object.assign(St,{store:j.store||{},leaves:new Set(j.leaves||[]),hol:new Set(j.hol||[]),dt:j.dt||75,tg:j.tg||90,wn:j.wn||92,prof:j.prof||{},odp:j.odp!==false,custom:j.custom||{}});Object.assign(TIMETABLES,St.custom);if(TIMETABLES[j.sec])St.sec=j.sec;St.att=St.store[St.sec]||{}}catch(e){}}
+function dl(name,text,type){if(window.claude&&claude.use){claude.use('downloads').then(d=>d?d.save({filename:name,data:text}):dl0(name,text,type)).catch(()=>dl0(name,text,type));return}dl0(name,text,type)}function dl0(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type||'text/plain'}));a.download=name;a.click()}
+function gmail(to,su,body,cc){const u=`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to||'')}&cc=${encodeURIComponent(cc||'')}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;window.open(u,'_blank','noopener')}
+/* verdicts: is it safe to skip a given day? */
+function leaveMiss(){const m={},from=St.today<START?START:St.today;St.leaves.forEach(d=>{if(d>=from){const c=dayCounts(d);for(const k in c)m[k]=(m[k]||0)+c[k]}});return m}
+function verdict(a,d){const c=dayCounts(d);if(!Object.keys(c).length)return null;const m=leaveMiss(),inL=St.leaves.has(d);
+  const ok=key=>a.rows.every(r=>!c[r.k]||r[key]-(m[r.k]||0)>=(inL?0:c[r.k]));return ok('skipTG')?'ok':ok('skipDT')?'risk':'no'}
+function outlookHTML(a){const L=dates(St.today<START?START:St.today,END).slice(0,7);
+  return`<div class="card"><h3>Next class days — should I skip?</h3><div class="scroll"><table><tr><th>Day</th><th>Classes</th><th>Verdict</th></tr>${L.map(x=>{const V=VER[verdict(a,x.d)];return`<tr><td><b>${DN[pd(x.d).getDay()]}</b> ${x.d}</td><td>${Object.entries(x.c).map(([k,n])=>esc(short(tt().subs[k]))+(n>1?' ×'+n:'')).join(', ')}</td><td><span class="pill" style="background:${V[1]}">${V[0]}</span></td></tr>`}).join('')}</table></div><p class="note">Assumes you attend everything else and counts your planned leave already.</p></div>`}
+function priorityHTML(a){const o={irr:0,det:1,danger:2,warn:3,safe:4},L=[...a.rows].sort((x,y)=>o[x.st]-o[y.st]||x.cur-y.cur).slice(0,6);
+  const act=r=>r.st==='irr'?'Attend every class and talk to your class advisor about condonation.':r.st==='det'?`Attend at least ${r.nDT} of the ${r.R} remaining classes to avoid detention.`:r.st==='danger'?`Attend the next ${r.rec} classes in a row to get back to ${St.tg}%.`:`${sgn(r.skipTG)} safe skip(s) left at ${St.tg}%.`;
+  return`<div class="card"><h3>Attend-first priority list</h3>${L.map(r=>`<div class="prio"><span class="pill" style="background:${ST[r.st][1]}">${ST[r.st][0]}</span><div><b>${esc(r.name)}</b> — ${f1(r.cur)}%<br><span class="note">${act(r)}</span></div></div>`).join('')}</div>`}
+function summaryText(){const a=analyze();return`AttendGuard summary (${fd(St.today)})\nStudent: ${St.prof.name||'-'} (${St.prof.reg||'-'}) · ${St.sec}\nOverall attendance: ${f1(a.ov)}% (${a.TA}/${a.TT}) · Detention risk: ${a.risk}\nTarget ${St.tg}% · Detention below ${St.dt}% · Classes left: ${a.left}\n\n`+a.rows.map(r=>`- ${r.name}: ${f1(r.cur)}% [${ST[r.st][0]}] · can skip ${sgn(r.skipTG)} · must attend ${r.nDT>r.R?'impossible':r.nDT} to avoid detention`).join('\n')}
+function exportCsv(){const a=analyze(),q=v=>'"'+String(v).replace(/"/g,'""')+'"';dl(`attendance-${St.sec.replace(/\s+/g,'_')}.csv`,['Subject,Conducted,Attended (incl. OD),Attendance %,Classes left,Must attend for detention limit,Must attend for target,Can skip (target),Can skip (detention limit),Status'].concat(a.rows.map(r=>[q(r.name),r.T,r.A,f1(r.cur),r.R,r.nDT,r.nTG,r.skipTG,r.skipDT,q(ST[r.st][0])].join(','))).join('\n'),'text/csv')}
+function toolbar(){return`<div class="row" style="margin-bottom:12px;justify-content:flex-end"><button class="g fix" id="tbMail">✉ Email summary (Gmail)</button><button class="g fix" id="tbCsv">⬇ Export CSV</button><button class="g fix" id="tbPrint">🖨 Print report</button></div>`}
+function bindToolbar(){$('tbMail').onclick=()=>gmail(St.prof.pemail||'',`Attendance summary – ${St.prof.name||St.sec}`,summaryText());$('tbCsv').onclick=exportCsv;$('tbPrint').onclick=()=>window.print()}
+/* calendar */
+function renderCal(){const a=analyze(),mo=[7,8,9,10];
+  let h=`<div class="card"><div class="row"><label>Clicking a date marks it as<select id="cm"><option value="leave">Planned leave</option><option value="hol">Holiday (no classes)</option></select></label></div><div class="legend" style="margin-top:8px"><span>■ blue: past class day</span><span>■ purple: planned leave</span><span>■ yellow: holiday</span><span style="color:var(--ok)">● safe to skip</span><span style="color:var(--wa)">● only above ${St.dt}%</span><span style="color:var(--det)">● don't skip</span></div></div><div class="two">`;
+  mo.forEach(m=>{const first=(new Date(2026,m,1).getDay()+6)%7,n=new Date(2026,m+1,0).getDate();let c='';for(let i=0;i<first;i++)c+='<div></div>';
+    for(let d=1;d<=n;d++){const ds=iso(new Date(2026,m,d)),cc=dayCounts(ds),k=tot({c:cc}),out=ds<START||ds>END,past=ds<St.today,v=!out&&!past&&k?verdict(a,ds):null,hol=St.hol.has(ds);
+      c+=`<div class="cd${out?' out':''}${hol?' hol':''}${St.leaves.has(ds)?' lv':''}${past&&k?' past':''}${ds===St.today?' td':''}" data-d="${ds}" title="${esc(Object.entries(cc).map(([q,n2])=>tt().subs[q]+(n2>1?' ×'+n2:'')).join(', '))}"><b>${d}</b><span>${hol?'Holiday':k?k+' cls':''}</span>${v?`<i style="background:${VER[v][1]}"></i>`:''}</div>`}
+    h+=`<div class="card"><h3>${MON[m]} 2026</h3><div class="cal">${['M','T','W','T','F','S','S'].map(x=>`<div class="ch">${x}</div>`).join('')}${c}</div></div>`});
+  const wk=[1,2,3,4,5,6].map(i=>[DN[i],(tt().days[DN[i]]||'').split(' ').filter(x=>x!=='-').length]),mx=Math.max(...wk.map(x=>x[1]),1),top=wk.reduce((p,q)=>q[1]>p[1]?q:p);
+  h+=`</div><div class="card"><h3>Weekly class load</h3>${wk.map(x=>`<div class="wk"><b style="width:36px">${x[0]}</b><u style="width:${x[1]/mx*70}%"></u> ${x[1]} periods</div>`).join('')}<p class="note">${top[0]} is your heaviest day: skipping it costs ${top[1]} classes at once.</p></div>`;
+  $('cal').innerHTML=h;
+  $('cal').querySelectorAll('.cd[data-d]').forEach(e=>e.onclick=()=>{const d=e.dataset.d,m=$('cm').value;if(d<START||d>END)return;
+    if(m==='hol'){St.hol.has(d)?St.hol.delete(d):St.hol.add(d);$('hol').value=[...St.hol].join(', ')}else{if(d<St.today||!tot({c:dayCounts(d)}))return;St.leaves.has(d)?St.leaves.delete(d):St.leaves.add(d)}
+    renderAll();$('cm').value=m})}
+/* settings */
+function importTT(text,name){const by={};text.split(/\r?\n/).map(l=>l.split(',').map(x=>x.trim())).forEach(r=>{if(r.length<2||!r[0]||/^(section|day)$/i.test(r[0]))return;let sec,day,sub,per;
+    if(r.length>=3&&!/^(mon|tue|wed|thu|fri|sat)/i.test(r[0]))[sec,day,sub,per]=r;else{sec=name||'My section';[day,sub,per]=r}
+    if(!day||!sub)return;const dd=day[0].toUpperCase()+day.slice(1,3).toLowerCase();((by[sec]=by[sec]||{})[dd]=by[sec][dd]||[]).push([sub,+per||0])});
+  const LET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';let n=0;
+  for(const sec in by){const subs={},days={},idx={};for(const d in by[sec]){const row=Array(9).fill('-');by[sec][d].forEach(([s,p])=>{if(!idx[s]){idx[s]=LET[Object.keys(idx).length%52];subs[idx[s]]=s}let i=p>=1&&p<=9?p-1:row.indexOf('-');if(i>=0)row[i]=idx[s]});days[d]=row.join(' ')}
+    TIMETABLES[sec]=St.custom[sec]={term:'Custom import',subs,days};n++}return n}
+function renderSet(){$('cfg').innerHTML=`<div class="two"><div class="card"><h3>Preferences</h3><label class="tgl"><input type="checkbox" id="odp" ${St.odp?'checked':''}> Count On-Duty (OD) classes as present</label><p class="note">Enter OD classes in the "My attendance" table. Ask your college whether OD counts towards the 75% rule.</p>
+  <label style="margin-top:12px">Parent / guardian email (for summary emails)<input id="pem" type="email" value="${esc(St.prof.pemail||'')}"></label><div class="row" style="margin-top:10px"><button class="g" id="cs1">✉ Email summary via Gmail</button></div></div>
+  <div class="card"><h3>Your data</h3><div class="row"><button class="g" id="cs2">Export analysis (CSV)</button><button class="g" id="cs3">Backup (JSON)</button><button class="g" id="cs4">Restore backup</button><button class="g" id="cs5" style="color:var(--det);border-color:var(--det)">Reset everything</button></div><input type="file" id="rf" accept=".json" style="display:none"><p class="note">Everything is stored only in this browser. Nothing is uploaded.</p></div></div>
+  <div class="card"><h3>Import your own timetable (CSV)</h3><p class="note">Rows: <code>section,day,subject,period</code> (period 1–9 is optional). Or <code>day,subject,period</code> with a section name below.</p><div class="row"><label>Section name (if not in file)<input id="tn" placeholder="My section"></label><label>CSV file<input type="file" id="tf" accept=".csv,.txt"></label></div><label style="margin-top:8px">…or paste<textarea id="tp" placeholder="Mon,Data Structures,1"></textarea></label><button class="g" id="tgo" style="margin-top:8px">Import timetable</button><div class="log" id="tlog"></div></div>`;
+  $('odp').onchange=()=>{St.odp=$('odp').checked;renderAll();renderAtt()};$('pem').oninput=()=>{St.prof.pemail=$('pem').value;save()};
+  $('cs1').onclick=()=>gmail(St.prof.pemail||'',`Attendance summary – ${St.prof.name||St.sec}`,summaryText());$('cs2').onclick=exportCsv;
+  $('cs3').onclick=()=>{save();dl('attendguard-backup.json',localStorage.getItem(KEY)||'{}','application/json')};$('cs4').onclick=()=>$('rf').click();
+  $('rf').onchange=async e=>{try{JSON.parse(await e.target.files[0].text());localStorage.setItem(KEY,await e.target.files[0].text());location.reload()}catch(x){alert('Not a valid backup file')}};
+  $('cs5').onclick=()=>{if(confirm('Delete all saved data in this browser?')){localStorage.removeItem(KEY);location.reload()}};
+  const go=t=>{const n=importTT(t,$('tn').value.trim());$('tlog').textContent=n?`Imported ${n} section(s). Pick it from the Class section list.`:'No valid rows found.';if(n){fillSecs();save()}};
+  $('tgo').onclick=()=>go($('tp').value);$('tf').onchange=async e=>go(await e.target.files[0].text())}
+
+</script>
+<script>
+'use strict';
+const RC={hod:'The Head of the Department',adv:'The Class Advisor',dean:'The Dean, Faculty of Engineering and Technology',dir:'The Director',fc:'The Faculty Coordinator'};
+const LT={
+ leave_med:['Leave','Medical / sick leave','Request for medical leave','I am suffering from {r|fever and body pain} and the doctor has advised me to take rest. Hence, I will not be able to attend classes {w}.','medical certificate'],
+ leave_per:['Leave','Personal work','Request for leave','I have an urgent personal matter ({r|personal work}) that needs my presence, due to which I will not be able to attend classes {w}.','letter from my parent/guardian'],
+ leave_fam:['Leave','Family function','Request for leave to attend a family function','I need to attend {r|a family function} at my hometown, due to which I will not be able to attend classes {w}.','letter from my parent/guardian'],
+ leave_emg:['Leave','Family emergency','Request for leave due to a family emergency','Owing to a family emergency ({r|urgent family matter}), I have to travel home immediately and will not be able to attend classes {w}.','letter from my parent/guardian'],
+ leave_ber:['Leave','Bereavement','Request for leave due to bereavement','Owing to the demise of {r|a close family member} in my family, I will not be able to attend classes {w}.','letter from my parent/guardian'],
+ od_hack:['On Duty (OD)','Hackathon / technical event','','I would like to inform you that I have registered to participate in {e|a hackathon / technical event}{o}{v}, scheduled {w}.','participation certificate'],
+ od_pap:['On Duty (OD)','Paper / project presentation','','I have been selected to present my work at {e|a conference / symposium}{o}{v}, scheduled {w}.','participation certificate'],
+ od_spo:['On Duty (OD)','Sports event','','I have been selected to represent the college in {e|an inter-college sports event}{o}{v}, scheduled {w}.','participation certificate'],
+ od_cul:['On Duty (OD)','Cultural event','','I have been selected to represent the college in {e|an inter-college cultural event}{o}{v}, scheduled {w}.','participation certificate'],
+ od_soc:['On Duty (OD)','NSS / NCC / social service','','I have been assigned to take part in {e|an NSS / NCC / social outreach programme}{o}{v}, scheduled {w}.','attendance certificate'],
+ od_pla:['On Duty (OD)','Placement / interview','','I have been shortlisted to attend {e|a placement / interview process}{o}{v}, scheduled {w}.','call letter and attendance proof'],
+ od_prj:['On Duty (OD)','Project review / research work','','I need to attend {e|a project review / research activity}{o}{v}, scheduled {w}.','faculty guide\'s confirmation']};
+const dOf=()=>/BME|Biotech/i.test(St.sec)?'Biomedical Engineering':'Electronics and Communication Engineering';
+const yOf=()=>{const y=St.sec.split(' ')[0];return({I:'I',II:'II',III:'III',IV:'IV'}[y]||y)+' Year'};
+function build(){const g=id=>($(id)?$(id).value.trim():''),t=LT[g('lt')]||LT.leave_med,od=t[0].startsWith('On'),f=g('lf')||St.today,to=g('ltt')||f,days=Math.round((pd(to)-pd(f))/864e5)+1;
+  const when=days>1?`from ${fd(f)} to ${fd(to)} (${days} days)`:`on ${fd(f)}`;
+  const para=t[3].replace(/\{r\|([^}]*)\}/,(m,d)=>g('lr')||d).replace(/\{e\|([^}]*)\}/,(m,d)=>g('le')||d).replace('{o}',g('lo')?`, organised by ${g('lo')}`:'').replace('{v}',g('lv')?` at ${g('lv')}`:'').replace('{w}',when);
+  const subj=od?`Request for On Duty (OD) permission – ${g('le')||t[1]} (${when.replace(/ \(\d+ days\)/,'')})`:`${t[2]} (${when.replace(/ \(\d+ days\)/,'')})`;
+  const doc=g('ld')||t[4];let imp='';
+  if(g('li')==='1'){const a=analyze(),m={};dates(f<St.today?St.today:f,to).forEach(x=>{for(const k in x.c)m[k]=(m[k]||0)+x.c[k]});const mt=Object.values(m).reduce((p,q)=>p+q,0);
+    if(mt)imp=`\nAs per the timetable, I will miss ${mt} class period(s) during this time (${Object.entries(m).map(([k,n])=>`${tt().subs[k]}: ${n}`).join('; ')}). My current overall attendance is ${f1(a.ov)}%, and I will attend all other classes to keep it above the required limit.\n`}
+  const close=od?`As this opportunity supports my academic and professional growth, I kindly request you to grant me On Duty (OD) permission for the above period. I will submit the ${doc} on my return and complete any missed coursework.`:`I kindly request you to grant me leave for the above period. I will complete the missed lessons and assignments, and I will submit the ${doc} on my return.`;
+  const P=St.prof,dept=g('lpd')||dOf(),rc=RC[g('lrc')];
+  const body=`From,\n${g('lpn')||'[Your name]'}\nRegister No.: ${g('lpr')||'[Register number]'}\n${g('lpy')||yOf()+' / '+St.sec}, Department of ${dept}\nSRM Institute of Science and Technology, Tiruchirappalli\n${g('lpe')?'Email: '+g('lpe')+'\n':''}\nDate: ${fd(St.today)}\n\nTo,\n${rc}${g('lrn')?' ('+g('lrn')+')':''}\nDepartment of ${dept}\nSRM Institute of Science and Technology, Tiruchirappalli\n\nSubject: ${subj}\n\nRespected Sir/Madam,\n\n${para}${imp}\n${close}\n\nThanking you,\n\nYours obediently,\n${g('lpn')||'[Your name]'}\n(${g('lpr')||'Register number'})`;
+  return{subj,body}}
+function renderLet(){const P=St.prof,v=k=>esc(P[k]||'');
+  const opts=['Leave','On Duty (OD)'].map(gp=>`<optgroup label="${gp} letters">${Object.entries(LT).filter(([k,t])=>t[0]===gp).map(([k,t])=>`<option value="${k}">${t[1]}</option>`).join('')}</optgroup>`).join('');
+  const first=[...St.leaves].sort()[0]||add(St.today,1),last=[...St.leaves].sort().pop()||first;
+  $('ltr').innerHTML=`<div class="two"><div class="card"><h3>Letter details</h3><div class="row"><label>Letter type<select id="lt">${opts}</select></label><label>Addressed to<select id="lrc">${Object.entries(RC).map(([k,x])=>`<option value="${k}">${x.replace('The ','')}</option>`).join('')}</select></label></div>
+  <div class="row" style="margin-top:10px"><label>From date<input type="date" id="lf" value="${first}"></label><label>To date<input type="date" id="ltt" value="${last}"></label></div>
+  <div class="row" style="margin-top:10px"><label>Event / occasion<input id="le" placeholder="e.g. Smart India Hackathon"></label><label>Organiser / institution<input id="lo" placeholder="e.g. IIT Madras"></label></div>
+  <div class="row" style="margin-top:10px"><label>Venue / city<input id="lv"></label><label>Reason / details (leave)<input id="lr" placeholder="e.g. viral fever"></label></div>
+  <label style="margin-top:10px">Supporting document you will submit<input id="ld" placeholder="medical certificate / participation certificate"></label>
+  <label class="tgl" style="margin-top:10px"><input type="checkbox" id="li" value="1"> Add my attendance impact paragraph</label></div>
+  <div class="card"><h3>About you</h3><div class="row"><label>Full name<input id="lpn" data-p="name" value="${v('name')}"></label><label>Register no.<input id="lpr" data-p="reg" value="${v('reg')}"></label></div>
+  <div class="row" style="margin-top:10px"><label>Year / section<input id="lpy" data-p="yr" value="${v('yr')}" placeholder="${yOf()} / ${esc(St.sec)}"></label><label>Department<input id="lpd" data-p="dept" value="${v('dept')}" placeholder="${dOf()}"></label></div>
+  <div class="row" style="margin-top:10px"><label>Your email<input id="lpe" data-p="email" value="${v('email')}"></label><label>Recipient name (optional)<input id="lrn" data-p="rname" value="${v('rname')}"></label></div>
+  <div class="row" style="margin-top:10px"><label>Recipient email (To)<input id="lto" data-p="rmail" value="${v('rmail')}"></label><label>CC<input id="lcc" data-p="cc" value="${v('cc')}"></label></div></div></div>
+  <div class="card"><h3>Your letter (editable)</h3><label>Subject<input id="lsu"></label><label style="margin-top:10px">Body<textarea id="lbd" class="letter"></textarea></label>
+  <div class="row" style="margin-top:12px"><button class="b fix" id="lgm">✉ Open in Gmail</button><button class="g fix" id="lml">Open mail app</button><button class="g fix" id="lcp">Copy</button><button class="g fix" id="ltx">Download .txt</button><button class="g fix" id="ldc">Download .doc</button><button class="g fix" id="lpr2">Print / Save as PDF</button></div>
+  <p class="note">Gmail opens a ready-to-send draft in a new tab (you must be signed in). Attach your certificate or invitation there before sending. Editing the fields above rewrites the letter; edit the text last.</p></div>`;
+  const gen=()=>{const r=build();$('lsu').value=r.subj;$('lbd').value=r.body};
+  $('ltr').querySelectorAll('input,select').forEach(e=>{if(e.id==='lsu')return;e.oninput=e.onchange=()=>{if(e.dataset.p){St.prof[e.dataset.p]=e.value;save()}
+    if(e.id==='li')e.value=e.checked?'1':'0';gen()}});
+  $('li').value='';$('li').onchange=()=>{$('li').value=$('li').checked?'1':'';gen()};gen();
+  const mail=()=>gmail($('lto').value,$('lsu').value,$('lbd').value,$('lcc').value);
+  $('lgm').onclick=()=>{if($('lbd').value.length>6000)alert('This letter is long; if Gmail cuts it off, use Copy instead.');mail()};
+  $('lml').onclick=()=>{location.href=`mailto:${encodeURIComponent($('lto').value)}?cc=${encodeURIComponent($('lcc').value)}&subject=${encodeURIComponent($('lsu').value)}&body=${encodeURIComponent($('lbd').value)}`};
+  $('lcp').onclick=async()=>{try{await navigator.clipboard.writeText($('lsu').value+'\n\n'+$('lbd').value);$('lcp').textContent='Copied ✓'}catch(e){$('lbd').select();document.execCommand('copy')}setTimeout(()=>$('lcp').textContent='Copy',1500)};
+  $('ltx').onclick=()=>dl('letter.txt',$('lsu').value+'\n\n'+$('lbd').value);
+  $('ldc').onclick=()=>dl('letter.doc',`<html><body style="font-family:'Times New Roman';font-size:12pt"><p><b>Subject: ${esc($('lsu').value)}</b></p><pre style="font:inherit;white-space:pre-wrap">${esc($('lbd').value)}</pre></body></html>`,'application/msword');
+  $('lpr2').onclick=()=>{const w=window.open('','_blank');if(!w){alert('Allow pop-ups to print');return}w.document.write(`<pre style="font:13pt/1.6 Georgia,serif;white-space:pre-wrap;max-width:700px;margin:40px auto">${esc($('lbd').value)}</pre>`);w.document.close();w.print()}}
+
+</script>
+<script>
+'use strict';
+const LG={en:['English','en-IN','English'],hi:['हिन्दी','hi-IN','Hindi'],ta:['தமிழ்','ta-IN','Tamil'],te:['తెలుగు (needs AI key)','te-IN','Telugu'],kn:['ಕನ್ನಡ (needs AI key)','kn-IN','Kannada'],ml:['മലയാളം (needs AI key)','ml-IN','Malayalam'],bn:['বাংলা (needs AI key)','bn-IN','Bengali'],fr:['Français (needs AI key)','fr-FR','French'],es:['Español (needs AI key)','es-ES','Spanish']};
+const TP={
+ en:{o:(p,n,m,r)=>`Your overall attendance is ${p}%. ${n} of ${m} subjects need attention. Detention risk: ${r}.`,b:(x,t,l)=>`You can skip up to ${x} more classes in total and still finish the semester above ${t}%. ${l}`,r:l=>`To recover, attend these classes in a row: ${l}.`,k:(r,i)=>`Detention risk: ${r}. ${i}`,none:'Nothing to recover — you are on track.',irr:l=>`Irreversible detention in: ${l}.`,help:'Ask me about your overall attendance, how many classes you can skip, what you must attend, or your detention risk.'},
+ hi:{o:(p,n,m,r)=>`आपकी कुल उपस्थिति ${p}% है। ${m} में से ${n} विषयों पर ध्यान देना ज़रूरी है। जोखिम: ${r}।`,b:(x,t,l)=>`सेमेस्टर ${t}% से ऊपर खत्म करने के लिए आप कुल ${x} कक्षाएँ तक छोड़ सकते हैं। ${l}`,r:l=>`सुधार के लिए लगातार ये कक्षाएँ अटेंड करें: ${l}।`,k:(r,i)=>`डिटेंशन जोखिम: ${r}। ${i}`,none:'सुधार की ज़रूरत नहीं है — आप सही रास्ते पर हैं।',irr:l=>`अपरिवर्तनीय डिटेंशन: ${l}।`,help:'मुझसे कुल उपस्थिति, कितनी कक्षाएँ छोड़ सकते हैं, या डिटेंशन जोखिम के बारे में पूछें।'},
+ ta:{o:(p,n,m,r)=>`உங்கள் மொத்த வருகை ${p}%. ${m} பாடங்களில் ${n} பாடங்களில் கவனம் தேவை. ஆபத்து: ${r}.`,b:(x,t,l)=>`செமஸ்டரை ${t}%க்கு மேல் முடிக்க மொத்தம் ${x} வகுப்புகள் வரை தவிர்க்கலாம். ${l}`,r:l=>`மீட்க, தொடர்ந்து இந்த வகுப்புகளில் கலந்து கொள்ளுங்கள்: ${l}.`,k:(r,i)=>`தடுப்புக் காவல் (detention) ஆபத்து: ${r}. ${i}`,none:'மீட்க எதுவும் தேவையில்லை — நீங்கள் சரியான பாதையில் உள்ளீர்கள்.',irr:l=>`மீள முடியாத detention: ${l}.`,help:'மொத்த வருகை, எத்தனை வகுப்புகளைத் தவிர்க்கலாம், detention ஆபத்து பற்றி கேளுங்கள்.'}};
+TP.en.lt='Opening the Letters tab — pick Leave or OD, fill the details and open it in Gmail.';TP.hi.lt='Letters टैब खुल रहा है — Leave या OD चुनें और Gmail में खोलें।';TP.ta.lt='Letters தாவல் திறக்கிறது — Leave அல்லது OD தேர்ந்தெடுத்து Gmail-இல் திறக்கவும்.';
+let lang='en',recog=null;
+function local(q){const a=analyze(),t=TP[lang]||TP.en,rows=a.rows,bad=rows.filter(r=>r.rec>0),irr=rows.filter(r=>r.st==='irr');
+  const sk=rows.filter(r=>r.skipTG>0).map(r=>`${r.name}: ${r.skipTG}`).join('; ')||'—';
+  if(/letter|\bOD\b|on duty|gmail|email|கடிதம்|पत्र/i.test(q)){document.querySelector('[data-t=ltr]').click();return t.lt}
+  if(/tomorrow|today|next class|कल|आज|நாளை/i.test(q)){const dsn=/today|आज/i.test(q)?St.today:add(St.today,1),v=verdict(a,dsn);return v?`${dsn}: ${Object.entries(dayCounts(dsn)).map(([k,n])=>tt().subs[k]+(n>1?' x'+n:'')).join(', ')}. ${VER[v][0]}.`:`${dsn}: no classes.`}
+  if(/bunk|skip|miss|leave|holiday|छुट्ट|छोड़|விடுப்|தவிர்/i.test(q))return t.b(a.skips,St.tg,sk);
+  if(/recover|attend|need|must|सुधार|ज़रूरी|வேண்டும்|மீட்/i.test(q))return bad.length?t.r(bad.map(r=>`${r.name} ${r.rec}`).join('; ')):t.none;
+  if(/risk|detent|danger|जोखिम|डिटेंशन|ஆபத்|தடுப்/i.test(q))return t.k(a.risk,irr.length?t.irr(irr.map(r=>r.name).join(', ')):'');
+  if(/help|what can/i.test(q))return t.help;
+  const sub=rows.find(r=>norm(r.name).split(' ').filter(w=>w.length>3).some(w=>norm(q).includes(w)));
+  if(sub)return`${sub.name}: ${f1(sub.cur)}% (${sub.A}/${sub.T}). `+(sub.skipTG>0?`${t.b(sub.skipTG,St.tg,'')}`:sub.rec?t.r(`${sub.name} ${sub.rec}`):'');
+  return t.o(f1(a.ov),rows.filter(r=>r.st!=='safe'&&r.st!=='warn').length,rows.length,a.risk)}
+async function llm(q,key){const a=analyze(),ctx={section:St.sec,today:St.today,semesterEnd:END,detentionBelow:St.dt,target:St.tg,overall:f1(a.ov),risk:a.risk,subjects:a.rows.map(r=>({name:r.name,attended:r.A,conducted:r.T,pct:f1(r.cur),left:r.R,mustAttendForDetention:r.nDT,mustAttendForTarget:r.nTG,canSkipAtTarget:r.skipTG,recoverStreak:r.rec,status:r.st}))};
+  if(!key){const sm=await claude.use('sample');if(!sm)throw new Error('AI unavailable');return (await sm(q+'\n\n(Answer in '+LG[lang][2]+', under 90 words, plain text, using only this data: '+JSON.stringify(ctx)+')',{modelTier:'quick'})).text}
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-5',max_tokens:500,system:`You are AttendGuard, a friendly attendance advisor for a college student. Use only this data and answer in ${LG[lang][2]}, in under 90 words, plain text, no markdown. Data: ${JSON.stringify(ctx)}`,messages:[{role:'user',content:q}]})});
+  const j=await r.json();if(!r.ok)throw new Error(j.error&&j.error.message||r.status);return j.content.map(c=>c.text||'').join('')}
+function msg(w,t){const d=document.createElement('div');d.className='m '+w;d.textContent=t;$('chat').appendChild(d);$('chat').scrollTop=1e9}
+async function ask(q){q=q.trim();if(!q)return;msg('me',q);if(/free (class)?rooms?|empty (class)?rooms?|vacant|classroom/i.test(q)&&window.FRFind){document.querySelector('[data-t=rooms]').click();window.FRFind(q);msg('bot','Opening the Free rooms tab with that search.');return}const key=$('akey').value.trim();let out;
+  if(true){try{out=await llm(q,key)}catch(e){out=local(q)+'\n(AI call failed: '+e.message+' — showing built-in answer.)'}}else out=local(q);
+  msg('bot',out);if($('spk').checked)speak(out)}
+function pickVoice(l,g){const vs=speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l.slice(0,2).toLowerCase()));
+  const F=/\bfemale\b|zira|samantha|heera|priya|veena|kalpana|lekha|susan|hazel|karen|tessa|neerja|swara|pallavi|aria|jenny/i,M=/(?<!fe)male|david|mark|ravi|rishi|hemant|prabhat|madhur|daniel|james|guy|valluvar/i;
+  const hit=vs.find(v=>(g==='female'?F:M).test(v.name));return{v:hit||vs[0]||null,exact:!!hit}}
+function speak(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const g=$('gen').value,u=new SpeechSynthesisUtterance(t.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu,''));u.lang=LG[lang][1];
+  const p=pickVoice(LG[lang][1],g);if(p.v)u.voice=p.v;if(!p.exact)u.pitch=g==='female'?1.3:0.75;u.rate=+$('rate').value;speechSynthesis.speak(u)}
+function mic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){msg('bot','Speech-to-text is not supported in this browser. Use Chrome or Edge.');return}
+  if(recog){recog.stop();return}recog=new SR();recog.lang=LG[lang][1];recog.interimResults=false;
+  recog.onresult=e=>ask(e.results[0][0].transcript);recog.onend=()=>{recog=null;$('mic').classList.remove('rec')};recog.onerror=e=>msg('bot','Microphone error: '+e.error);
+  $('mic').classList.add('rec');recog.start()}
+function renderAI(){if($('chat')){return}
+  $('ai').innerHTML=`<div class="card"><h3>AI attendance assistant</h3>
+  <div class="row"><label>Language<select id="lang">${Object.entries(LG).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('')}</select></label>
+  <label>Voice<select id="gen"><option value="female">Female</option><option value="male">Male</option></select></label>
+  <label>Speed<input type="range" id="rate" min="0.7" max="1.3" step="0.1" value="1"></label>
+  <label class="fix"><input type="checkbox" id="spk" style="display:inline;width:auto" checked> Speak replies</label></div>
+  <div class="chips" id="qs"></div><div class="chat" id="chat"></div>
+  <div class="row" style="margin-top:10px"><input id="q" placeholder="Ask: How many classes can I skip?" style="margin:0"><button class="g fix mic" id="mic" title="Speak">🎤 Speak</button><button class="b fix" id="send">Send</button></div>
+  <label style="margin-top:12px">Optional: your Anthropic API key (kept in this tab only) — unlocks free-form answers in any language<input type="password" id="akey" placeholder="sk-ant-..." autocomplete="off"></label>
+  <p class="note">Without a key the assistant answers built-in questions in English, Hindi and Tamil from your data. Voices depend on your device; Female/Male picks a matching installed voice when one exists.</p></div>`;
+  const qs={en:['How is my attendance?','How many classes can I skip?','What must I attend to recover?','What is my detention risk?'],hi:['मेरी उपस्थिति कैसी है?','मैं कितनी कक्षाएँ छोड़ सकता हूँ?','डिटेंशन जोखिम क्या है?'],ta:['என் வருகை எப்படி?','எத்தனை வகுப்புகளைத் தவிர்க்கலாம்?','detention ஆபத்து என்ன?']};
+  const chips=()=>{$('qs').innerHTML=(qs[lang]||qs.en).map(x=>`<span class="chip">${x}</span>`).join('');$('qs').querySelectorAll('.chip').forEach(c=>c.onclick=()=>ask(c.textContent))};
+  $('lang').onchange=()=>{lang=$('lang').value;chips();if(recog)recog.stop()};$('send').onclick=()=>{ask($('q').value);$('q').value=''};$('q').onkeydown=e=>{if(e.key==='Enter')$('send').click()};$('mic').onclick=mic;chips();
+  msg('bot','Hi! I can read your attendance data and tell you how many classes you can skip, what you must attend, and your detention risk. Type or tap 🎤 to speak.');
+  if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{}}
+renderAI();
+
+</script>
+<script>
+load();if(!toks().every(k=>St.att[k]))initAtt(true);bind();renderAll();renderLet();renderSet();
+
+</script>
+<script>
+(function(){
+
+const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+const ST=[540,590,650,700,750,800,850,910,960],EN=[590,640,700,750,800,850,900,960,1010];
+const FL={1:"Ground floor",2:"1st floor",3:"2nd floor",4:"3rd floor",5:"4th floor",6:"5th floor"};
+const AC=new Set(["IST 107","IST 108","IST 309","TB 106","625","IST 416","IST 518"]);
+const occ={};
+function P(s){const o=[];s.split(",").forEach(x=>{const[a,b]=x.split("-").map(Number);for(let i=a;i<=(b||a);i++)o.push(i)});return o}
+function add(r,days,per){occ[r]=occ[r]||DAYS.map(()=>new Set());P(days).forEach(d=>P(per).forEach(p=>occ[r][d].add(p)))}
+// home rooms
+add("IST 519","0-4","1-4");add("IST 225","1,3","1-4");add("IST 225","0,2","1,3-4");add("IST 225","4","1-4");
+add("IST 411","0-4","6-9");add("IST 416","0-4","1-4");add("IST 211","0-4","6-9");add("IST 518","0-4","1-4,6-9");
+add("IST 227","0-2","1-4");add("IST 227","3","1,2,4");add("IST 227","4","1-3");
+add("IST 602","0,1,3","1-4");add("IST 602","2","1-3,7");add("IST 602","4","1-4,8-9");add("IST 602","0","6-7");add("IST 602","1","6");
+// shared halls / labs
+add("625","2","8-9");add("625","4","6");add("625","1","1-2,7,3");add("625","2","1");add("625","0","1-2,6-7");
+add("401","2","1");add("401","3","1-2");
+add("TB 106","3","3-4");add("TB 106","4","1");add("TB 106","1","6-9");add("TB 106","2","6-7");
+add("IST 107","0","3-4,6-9");add("IST 107","1","1-2,6-7");add("IST 107","3","6-9");add("IST 107","4","8-9");
+add("IST 108","1","1-2,6-7");add("IST 108","4","8-9,6-7,1");add("IST 108","2","2,8-9");add("IST 108","3","1-4");add("IST 108","0","1-2");
+add("IST 309","0","1-4,6-9");add("IST 309","1","1-2");add("IST 309","3","1-2,6-9");add("IST 309","2","8-9");add("IST 309","4","6-7");
+const rooms=Object.keys(occ).sort();
+const fl=r=>+(r.match(/\d/)||[1])[0];
+const hm=m=>String(m/60|0).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+const tm=s=>{const[h,m]=s.split(":").map(Number);return h*60+m};
+// status at (day, minute): returns {free, until(min) , busyUntil}
+function status(r,d,t){
+  const busy=p=>occ[r][d].has(p);
+  let cur=ST.findIndex((s,i)=>t>=s&&t<EN[i]);
+  if(t<ST[0])cur=-1;
+  if(t>=EN[8])return{free:false,over:true};
+  if(cur>=0&&busy(cur+1)){let i=cur;while(i<9&&busy(i+1))i++;return{free:false,until:ST[i]<EN[i-1]?EN[i-1]:EN[i-1]}}
+  let i=cur<0?(t<ST[0]?0:cur):cur+1; // next period index to test (0-based)
+  if(cur<0)i=0;
+  while(i<9&&!busy(i+1))i++;
+  return{free:true,until:i>=9?EN[8]:ST[i]};
+}
+function nowState(){const n=new Date();let d=(n.getDay()+6)%7,t=n.getHours()*60+n.getMinutes();if(d>4||t>=EN[8]){d=d>4||d==4?0:d+1;t=ST[0]}if(t<ST[0])t=ST[0];return{d,t}}
+const $=id=>document.getElementById(id);
+DAYS.forEach((x,i)=>$("fr_day").add(new Option(x,i)));
+function setNow(){const s=nowState();$("fr_day").value=s.d;$("fr_time").value=hm(s.t);const n=new Date();OFF=s.t==n.getHours()*60+n.getMinutes()?n.getSeconds():0;HL=new Set;render()}
+function render(){
+  T0=Date.now();
+  const d=+$("fr_day").value,t=tm($("fr_time").value),ac=$("fr_acOnly").checked,by={};
+  rooms.forEach(r=>{if(ac&&!AC.has(r))return;(by[fl(r)]=by[fl(r)]||[]).push(r)});
+  let h="";
+  Object.keys(by).sort().forEach(f=>{
+    h+=`<h2>${FL[f]||"Floor "+f}</h2><div class="grid">`;
+    by[f].forEach(r=>{const s=status(r,d,t);
+      h+=`<div class="room ${s.free?"f":"bz"}" data-r="${r}"><b>${r}${AC.has(r)?'<i class="tag">AC</i>':""}</b><span>${s.free?"Free until "+hm(s.until)+" ("+(s.until-t)+" min)":s.over?"Day over":"In use until "+hm(s.until)}</span></div>`});
+    h+="</div>"});
+  $("fr_grid").innerHTML=h||'<p class="note">No rooms match.</p>';drawMap(d,t,ac);det(d,t)}
+["fr_day","fr_time","fr_acOnly"].forEach(i=>$(i).addEventListener("input",()=>{OFF=0;HL=new Set;render()}));$("fr_now").onclick=setNow;
+
+// ---- AI room finder ----
+function localParse(s){
+  s=s.toLowerCase();const f={};
+  if(/\bnon[- ]?ac\b/.test(s))f.ac=false;else if(/\b(ac|a\/c|air.?condition)/.test(s))f.ac=true;
+  if(/ground/.test(s))f.floor=1;else{const m=s.match(/(\d)(st|nd|rd|th)\s*floor/);if(m)f.floor=+m[1]+1;else{const m2=s.match(/floor\s*(\d)/);if(m2)f.floor=+m2[1]}}
+  let m=s.match(/(\d+(?:\.\d+)?)\s*(hours?|hrs?|h)\b/);if(m)f.minutes=Math.round(+m[1]*60);
+  m=s.match(/(\d+)\s*(minutes?|mins?)/);if(m)f.minutes=+m[1];
+  if(/half an hour/.test(s))f.minutes=30;
+  DAYS.forEach((x,i)=>{if(s.includes(x.toLowerCase().slice(0,3)))f.day=i});
+  m=s.match(/(?:at|from)\s*(\d{1,2})(?::(\d\d))?\s*(am|pm)?/);
+  if(m){let h=+m[1];if(m[3]=="pm"&&h<12)h+=12;if(!m[3]&&h<8)h+=12;f.time=hm(h*60+(+m[2]||0))}
+  return f}
+async function parse(s){
+  try{const sm=await claude.use("sample");if(sm){
+    const r=await sm.json(`Extract room-search filters from this student request. Reply ONLY with JSON: {"ac":true|false|null,"floor":number|null (ground floor=1, 1st floor=2, 2nd=3, ...),"minutes":number|null (duration needed),"day":0-4|null (Mon=0),"time":"HH:MM"|null (24h start time, null = now)}.\nRequest: ${s}`,{modelTier:"quick"});
+    const f={};["ac","floor","minutes","day","time"].forEach(k=>{if(r&&r[k]!=null)f[k]=r[k]});return{f,ai:true}}}catch(e){}
+  return{f:localParse(s),ai:false}}
+async function find(){
+  const s=$("fr_q").value.trim();if(!s)return;$("fr_ai").innerHTML='<span class="note">Thinking…</span>';
+  const{f,ai}=await parse(s),n=nowState();
+  const d=f.day!=null?f.day:$("fr_day").value*1===n.d?n.d:n.d,t=f.time?tm(f.time):(f.day!=null?ST[0]:n.t),need=f.minutes||0;
+  OFF=0;$("fr_day").value=d;$("fr_time").value=hm(t);render();
+  const res=rooms.filter(r=>{if(f.ac===true&&!AC.has(r))return false;if(f.ac===false&&AC.has(r))return false;if(f.floor&&fl(r)!=f.floor)return false;
+    const x=status(r,d,t);return x.free&&x.until-t>=need}).map(r=>({r,u:status(r,d,t).until}));
+  const desc=[f.ac===true?"AC":f.ac===false?"non-AC":"",f.floor?(FL[f.floor]||"floor "+f.floor):"",need?need+" min":"",DAYS[d]+" "+hm(t)].filter(Boolean).join(" · ");
+  HL=new Set(res.map(x=>x.r));render();
+  let h=`<div class="note">${ai?"AI understood":"Understood"}: ${desc}</div>`;
+  h+=res.length?res.map(x=>`<div class="hit" data-r="${x.r}"><b>${x.r}${AC.has(x.r)?" · AC":""} <span class="note">${FL[fl(x.r)]}</span></b><span>free until ${hm(x.u)}</span></div>`).join(""):'<div class="hit" style="background:#f8f9ff">No room matches. Try a shorter duration or another floor.</div>';
+  $("fr_ai").innerHTML=h}
+$("fr_go").onclick=find;$("fr_q").addEventListener("keydown",e=>{if(e.key=="Enter")find()});
+document.querySelectorAll("#rooms .chip").forEach(c=>c.onclick=()=>{$("fr_q").value=c.dataset.q;find()});
+// ---- 3D map, countdown, squad ----
+let OFF=0,T0=Date.now(),sel=null,HL=new Set,DS=null;const claimed=new Set();
+const FS={1:"G",2:"1",3:"2",4:"3",5:"4",6:"5"};
+const pr=(x,y,z)=>[(x-y)*.866,(x+y)*.5-z],pt=a=>a.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
+function box(x,y,z,w,d,h,c){const A=pr(x,y,z+h),B=pr(x+w,y,z+h),C=pr(x+w,y+d,z+h),D=pr(x,y+d,z+h),E=pr(x,y+d,z),F=pr(x+w,y+d,z),G=pr(x+w,y,z);
+  return`<polygon class="${c}" points="${pt([A,B,C,D])}"/><polygon class="${c} l" points="${pt([D,C,F,E])}"/><polygon class="${c} r" points="${pt([B,C,F,G])}"/>`}
+function drawMap(d,t,ac){
+  const fs=[...new Set(rooms.map(fl))].sort().reverse();let s="";
+  fs.forEach(f=>{const z=(f-1)*78;
+    s+=`<rect class="band" x="-45" y="${-(z+28)}" width="250" height="72" rx="8"/><text class="fl" x="-50" y="${20-z}">${FS[f]}</text>`;
+    rooms.filter(r=>fl(r)==f).forEach((r,i)=>{const x=i*44,y=-i*44,st=status(r,d,t),c=pr(x+20,y+20,z+26);
+      s+=`<g data-r="${r}" class="rmg${r==sel?" sel":""}${claimed.has(r)?" cl":""}${HL.has(r)?" hl":""}" style="opacity:${ac&&!AC.has(r)?.25:1}">${box(x,y,z,40,40,26,st.free?"fr":"bz")}<text x="${c[0].toFixed(1)}" y="${(c[1]+3).toFixed(1)}">${r.replace("IST ","")}</text></g>`})});
+  const m=$("fr_map");m.setAttribute("viewBox","-85 -425 290 480");m.innerHTML=s}
+const vs=()=>tm($("fr_time").value)*60+OFF+(Date.now()-T0)/1000;
+const t12=m=>{const h=m/60|0;return(h%12||12)+":"+String(m%60).padStart(2,"0")+" "+(h<12?"AM":"PM")};
+function det(d,t){
+  const el=$("fr_det");if(!sel){el.innerHTML='<p class="note">Tap a room to see its countdown.</p>';DS=null;return}
+  const s=status(sel,d,t);DS=s;
+  let h=`<b>${sel}</b> · ${FL[fl(sel)]}${AC.has(sel)?" · AC":""}<div class="note" id="fr_lab"></div><div class="big" id="fr_cd"></div>`;
+  if(s.free){const c=claimed.has(sel);h+=`<div class="row"><button id="fr_claim" class="${c?"g":"b"}">${c?"Release room":"Claim this room"}</button>`;
+    if(c)h+=`<a class="btn" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent("📍 Heading to "+sel+". It's free until "+t12(s.until)+". Come fast!")}">📲 Call the Squad</a>`;h+="</div>"}
+  el.innerHTML=h;paintCd()}
+function paintCd(){
+  if(!DS||!$("fr_cd"))return;if(DS.over){$("fr_lab").textContent="Timetable day is over";$("fr_cd").textContent="--:--:--";return}
+  const r=Math.max(0,Math.round(DS.until*60-vs())),p=n=>String(n).padStart(2,"0");
+  $("fr_lab").textContent=DS.free?(DS.until>=EN[8]?"Free for the rest of the day — ends in":"Free · next class starts in"):"In use · class ends in";
+  $("fr_cd").textContent=p(r/3600|0)+":"+p(r/60%60|0)+":"+p(r%60)}
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-r]");
+  if(g){sel=g.dataset.r;render();if(!g.closest("svg"))$("fr_mapc").scrollIntoView({behavior:"smooth"});return}
+  if(e.target.id=="fr_claim"){claimed.has(sel)?claimed.delete(sel):claimed.add(sel);render()}});
+setInterval(()=>{const v=vs(),m=Math.floor(v/60);
+  if($("fr_time").value&&m!=tm($("fr_time").value)&&v<EN[8]*60){OFF=v-m*60;$("fr_time").value=hm(m);render()}else paintCd()},1000);
+setNow();
+
+window.FRFind=q=>{$("fr_q").value=q;find()};
+})();
+</script>
+</body></html>
