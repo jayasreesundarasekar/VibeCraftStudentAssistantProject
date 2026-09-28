@@ -1,17 +1,4 @@
 
-
-Skip to content
-Using Gmail with screen readers
-Enable desktop notifications for Gmail.
-   OK  No, thanks
-Conversations
-Gemini
-Boost your productivity with Gemini in Gmail
-Get higher access for Gemini across various apps, including Gmail. And 400 GB of storage at ₹100 for 3 months ₹399.
-45% of 15 GB used
-Terms · Privacy · Programme Policies
-Last account activity: 0 minutes ago
-Details
 # AttendGuard 📚
 ## Student Attendance Predictor & Detention Prevention System
 
